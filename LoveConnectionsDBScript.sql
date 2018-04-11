@@ -2,17 +2,10 @@ drop database if exists LoveConnections;
 create database if not exists LoveConnections;
 use LoveConnections;
 
-create table OrganizationInfo (
-  organizationID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEy,
-  organization VARCHAR(30), 
-  email VARCHAR(30) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  firstName VARCHAR(30),
-  lastName VARCHAR(30)
-);
-
 create table MemberInfo (
   memberID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY Key,
+  organization BOOL,
+  organizationName VARCHAR(30), 
   email VARCHAR(30) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   firstName VARCHAR(30) NOT NULL,
@@ -21,13 +14,13 @@ create table MemberInfo (
 
 create table EventInfo (
   eventID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  organizationID_FK INT(6) UNSIGNED,
+  memberID_FK INT(6) UNSIGNED,
   eventDate Date NOT NULL,
-  eventName VARCHAR(30),
+  eventName VARCHAR(255),
   eventLocation VARCHAR(70),
   numRounds INT(3),
-  foreign key (organizationID_FK) references
-    OrganizationInfo(organizationID_PK)
+  foreign key (memberID_FK) references
+    MemberInfo(memberID_PK)
 );
 
 create table EventsAndRounds (
@@ -87,6 +80,3 @@ create table UserInterests (
   foreign key(memberID_FK) references
     memberInfo(memberID_PK) on delete cascade 
 );
-select * from organizationInfo;
-select email, `password` FROM organizationInfo;
-select email, `password` FROM memberInfo;
