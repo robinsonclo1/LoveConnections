@@ -1,0 +1,431 @@
+/* Universal Rules */
+
+* {
+	font-family: 'Gill Sans MT', 'Microsoft YaHai UI', sans-serif;
+	font-weight: 200;
+}
+
+html {
+  overflow: auto;
+}
+
+header .row {
+	display: flex;
+	align-items: center;
+	background-color: #FF64AB;
+}
+
+ul {
+  margin: 30px auto;
+  text-align: center;
+
+}
+
+.topnav li {
+  color: black;
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 0 5px;
+}
+
+.topnav li:hover {
+  color: #DBE9EE;
+}
+
+header h1{
+	padding: 5px 0;
+	text-transform: uppercase;
+	margin: 0;
+	display: fixed;
+	align-items: left;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+  color:black;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+/* Navigation Bar (including while logged in) */
+
+.topnav {
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:0;
+  letter-spacing:1px;
+  margin-bottom: 0px;
+}
+.topnav a{
+  padding:10px 15px 9px 15px;
+  margin-right: 0;
+  margin-left: 0;
+  display:inline-block;
+  color:black;
+}
+.topnav h1 {
+  padding-left:0;
+  padding-right:0;
+}
+.topnav h1 a{
+  padding:5px 0px 2px 0px;
+  margin-right: 0;
+  margin-left: 0;
+  display:inline-block;
+  color:black;
+}
+.topnav a:hover {
+  text-decoration:none;
+}
+.topnav li a:hover{
+  background-color:#ff318f;
+  color:#ffffff;
+  text-decoration:none;
+}
+.topnav li a.active {
+  background-color:#ff318f;
+  color:#ffffff;
+  text-decoration:none;
+}
+
+.topnav.loggedIn a{
+  padding:10px 15px 9px 15px;
+  margin-right: 0;
+  margin-left: 0;
+  border-left:0;
+  display:inline-block;
+  color:black;
+  text-decoration:none;
+}
+.topnav.loggedIn h1{
+  padding:5px 15px 2px 0px;
+  margin-right: 0;
+  margin-left: 0;
+  display:inline-block;
+  color:black;
+  text-align: left;
+  text-decoration:none;
+}
+#siteNav {
+  padding-left:0;
+  cursor: pointer;
+}
+#howItWorks {
+  padding-left:0;
+}
+
+
+/* Log In Modal */
+
+nav #login-content {
+  color: #111;
+  text-transform:none;
+  text-align: right;
+  font-weight: normal;
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  z-index: 999;
+  background: #fff;
+  background-image: linear-gradient(top, #fff, #eee);
+  padding: 10px;
+  box-shadow: 2px 3px 10px 1px rgba(0,0,0,.9);
+  border-radius: 3px 0 3px 3px;
+}
+
+nav li #login-content {
+  right: 0;
+  width: 275px;
+}
+
+/*--------------------*/
+
+#inputs input {
+  background: #f1f1f1;
+  padding: 6px 5px;
+  margin: 0 0 5px 0;
+  width: 255px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px #ccc inset;
+}
+
+#inputs input:focus {
+  background-color: #fff;
+  border-color: #e8c291;
+  outline: none;
+  box-shadow: 0 0 0 1px #e8c291 inset;
+}
+
+/*--------------------*/
+
+#login #actions {
+  margin: 5px 0 0 0;
+}
+
+#login #submit {
+  background-color: #ff318f;
+  background-image: linear-gradient(top, #ff56a3, #ff318f);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.5);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+  border: 1px solid #7e1515;
+  float: right;
+  height: 30px;
+  padding: 0;
+  width: 100px;
+  cursor: pointer;
+  color: #fff;
+}
+
+#login #submit:hover,
+#login #submit:focus {
+  background-color: #ff56a3;
+  background-image: linear-gradient(top, #ff56a3, #ff318f);
+}
+
+#login #submit:active {
+
+  color: #111;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+
+#login #submit::-moz-focus-inner {
+  border: none;
+}
+
+#login label {
+  float: right;
+  line-height: 30px;
+}
+
+#login label input {
+  position: relative;
+  top: 2px;
+  right: 2px;
+}
+
+/* Welcome Page and front end styling */
+
+body h1{
+	text-align: center;
+	display: fixed;
+	color:#000000;
+	margin:0;
+}
+
+body h2{
+	text-align: center;
+	display: fixed;
+	margin:2;
+}
+
+.MainPgHeader {
+  text-align:left;
+}
+body h3{
+	text-align: center;
+	display: fixed;
+	margin: 5px;
+}
+
+body h4{
+	text-align: left;
+	display: fixed;
+}
+
+label {
+  margin: 10px 0;
+}
+
+body p{
+	text-align:center;
+	display:fixed;
+	font-size:16px;
+}
+
+/* Button style */
+
+.btn {
+  margin: 5px 5px;
+  display: fixed;
+  background:rgba(255,100,171,.6);
+  color: rgba(0,0,0,1);
+  transition: background-color 0.5s ease;
+}
+.btn:hover {
+   background: rgba(255,100,171,1);
+   color:rgba(0,0,0,1);
+}
+
+.btn-danger {
+	background: rgba(255,92,92,.6);
+}
+.btn-danger:hover {
+   background: rgba(255,92,92,1);
+   color:rgba(0,0,0,1);
+}
+
+.siteName {
+  text-align:left;
+}
+
+.eventBox {
+  overflow:auto;
+}
+
+/* Front pages */
+
+.sign-up-box {
+  background-color:rgba(255,100,171,.75);
+  border-radius: 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 30px;
+  padding: 10px 20px 20px 20px;
+}
+
+.sign-up-box input {
+  display:block;
+  margin: 10px auto;
+  width: 50%;
+}
+
+.sign-up-box .btn {
+  display:block;
+  margin: auto;
+  margin-top: 15px;
+  width: 30%;
+  float: center;
+}
+
+.modal-overlay.active {
+  animation: fadeIn .25s forwards;
+}
+
+.modal.active {
+  animation: slideUp .65s .5s cubic-bezier(.17, .89, .32, 1.28) forwards,
+             fadeIn .25s forwards;
+}
+
+/* Member's area */
+.sidenavContainer {
+  margin:20px;
+}
+
+.eventBox {
+  height: 39%;
+  margin: 10px 0px;
+  padding: 10px 10px;
+  background: rgb(251,166,225); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(251,166,225,.4) 47%, rgba(255,124,216,1) 77%, rgba(255,124,216,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(251,166,225,1) 47%,rgba(255,124,216,1) 77%,rgba(255,124,216,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(251,166,225,.6) 47%,rgba(255,124,216,.75) 77%,rgba(255,124,216,.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fba6e1', endColorstr='#ff7cd8',GradientType=0 ); /* IE6-9 */
+  border-radius: 10px;
+}
+
+.eventBox h1 {
+  font-size: 2em;
+  padding-bottom: 10px;
+}
+
+.eventBox a {
+  padding: 8px 20px;
+  text-decoration: none;
+  font-size: 1.75em;
+  display: block;
+  transition: 0.3s;
+  color: #000;
+}
+
+.eventBox a:hover, .offcanvas a:focus{
+  color: #f1f1f1;
+	background-color: rgba(31,190,214,.6);
+	border-radius: 10px;
+}
+
+.eventBox #changeDetails-trigger:hover, .offcanvas #changeDetails-trigger:focus{
+	background-color: rgba(0,0,214,.6);
+}
+
+.modal{
+    z-index: 20;
+}
+.modal-backdrop{
+    z-index: 10;
+}​
+
+.modal-body h4 {
+  display:inline-block;
+  position: relative;
+  width:55%;
+  margin-bottom: 10px;
+}
+
+.modal-body input {
+  margin: 5px;
+  display:block;
+  width:100%;
+}
+
+.modal-body #us2 {
+   width: 300px;
+   height: 200px;
+   margin-left: 15px;
+}
+
+.detailsModalContainer {
+  padding: 10px;
+  width: 47%;
+  display: inline-block;
+}
+
+.roundDetails h2 {
+  padding: 10px;
+}
+
+.participantBox, .organizationBox {
+  display: none;
+}
+
+
+.details {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.details td {
+  padding-bottom: 10px;
+  font-size: 1.3em;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.details .logistics {
+  text-align:right;
+  padding-right: 5px;
+  font-size: 1.4em;
+}
+
+.buttonHolder {
+  width: 100%;
+  text-align:center;
+}
+
+.eventCard #location,#numRounds {
+  display:none;
+}
