@@ -23,7 +23,7 @@
   $password_err = "";
   $id = "";
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['email'])){
 
 	  if (empty(trim($_POST["email"]))) {
 		  $email_err = 'Please enter your email.';
@@ -123,8 +123,9 @@ if(!isset($_SESSION['email']) || empty($_SESSION['email'])){ ?>
 	  <div class="topnav">
 	    <h1 class="col-md-6 col-sm-6 siteName"><a href='welcome.php'>Love Connections</a></h1>
 		  <nav class="col-sm-offset-4 col-md-2 col-sm-2" id="siteNav">
-		  <li id="logout"><a href="#" data-toggle="modal" data-target="#logOutModal" id="logout-trigger">Log Out</a></li>
-		</nav>
+  		  <li id="changeSettings"><a href="changeSettings.php">Change Settings</a></li>
+		    <li id="logout"><a href="#" data-toggle="modal" data-target="#logOutModal" id="logout-trigger">Log Out</a></li>
+    </nav>
       </div>
 	</header>
 
