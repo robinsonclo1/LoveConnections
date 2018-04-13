@@ -1,19 +1,7 @@
 <?php
-// Initialize the session
-session_start();
-
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['email']) || empty($_SESSION['email'])){
-  header("location: homepage.php");
-  exit;
-}
-
-$conn = mysqli_connect('localhost', 'root', '', 'loveConnections');
-if ($conn === false) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-require "topnav.php";
+  require '../include/connection.php';
+  require '../include/session.php';
+  require "../include/topnav.php";
 
 function getEventDetails($conn) {
   $records = [];
@@ -135,7 +123,7 @@ function eventDateSorter($operator, $conn) {
                 <h4>Event Details</h4>
 
                 <!-- The events are added here -->
-                <form class="eventForm" id="addEventForm" action="newEvent.php" method="POST">
+                <form class="eventForm" id="addEventForm" action="../postLogin/newEvent.php" method="POST">
 
                   <div class="detailsModalContainer">
                     <label>Event Name</label>
@@ -197,7 +185,7 @@ function eventDateSorter($operator, $conn) {
             <div class="buttonHolder">
               <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteEventModal" id="editEventDeleteEvent">Delete Event</a>
               <a type="button" class="btn btn-default" data-toggle="modal" data-target="#changeDetailsModal" id="editEventDetails">Change Details</a>
-              <a type="button" class="btn btn-default" id="toMemberMatcher" href="matchMembers.php">Match Members</a>
+              <a type="button" class="btn btn-default" id="toMemberMatcher" href="../postLogin/matchMembers.php">Match Members</a>
             </div>
 
             <!-- Change Details Modal -->
@@ -215,7 +203,7 @@ function eventDateSorter($operator, $conn) {
                     <h4>Event Details</h4>
 
                     <!-- The events are added here -->
-                    <form class="eventForm"  id="alterEventForm" action="alterEvent.php" method="POST">
+                    <form class="eventForm"  id="alterEventForm" action="../postLogin/alterEvent.php" method="POST">
 
                       <div class="detailsModalContainer">
                         <input type="hidden" name="id" id="eventID" value="<?=$_GET['id']?>" />
@@ -255,7 +243,7 @@ function eventDateSorter($operator, $conn) {
                   <div class="modal-body">
                     <h4>Event Details</h4>
 
-                    <form class="eventForm"  id="deleteEventForm" action="deleteEvent.php" method="POST">
+                    <form class="eventForm"  id="deleteEventForm" action="../postLogin/deleteEvent.php" method="POST">
                       <div class="detailsModalContainer">
                         <input type="hidden" name="id" id="eventID" value="<?=$_GET['id']?>" />
                         <label>Event Name:</label> <?=$name?><br>

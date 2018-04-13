@@ -1,20 +1,7 @@
 <?php
-// Initialize the session
-session_start();
-
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['email']) || empty($_SESSION['email'])){
-  header("location: homepage.php");
-  exit;
-}
-
-$conn = mysqli_connect('localhost', 'root', '', 'loveConnections');
-if ($conn === false) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-
-require "topnav.php";
-
+  require '../include/connection.php';
+  require '../include/session.php';
+  require "../include/topnav.php";
 ?>
 
 <!DOCTYPE html>
