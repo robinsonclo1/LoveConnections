@@ -1,10 +1,6 @@
 <?php
 
-
-  $conn = mysqli_connect('localhost', 'root', '', 'loveConnections');
-  if ($conn === false) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
+  require 'connection.php';
 
   $email = "";
   $password = "";
@@ -53,7 +49,7 @@ function loginCheck($conn, $sql, $id, $email, $password) {
                 session_start();
                 $_SESSION['email'] = $email;
                 $_SESSION['id'] = $id;
-                header("location: welcome.php");
+                header("location: ../postLogin/welcome.php");
 
               } else {
                 $password_err = "The password you entered was not valid.";

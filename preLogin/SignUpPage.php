@@ -1,10 +1,8 @@
 <?php
-  $conn = new mysqli('localhost', 'root', '', 'loveConnections');
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+  require '../include/connection.php';
+  include "../include/topnav.php"
 ?>
-<?php include "topnav.php" ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -24,7 +22,7 @@
 		  </div>
 
       <!-- These forms are hidden/displayed in the javaScriptMain file -->
-		  <form class="sign-up-box organizationBox" action="EmailConfirmationPage.php" method="post">
+		  <form class="sign-up-box organizationBox" action="../preLogin/EmailConfirmationPage.php" method="post">
         <input type="hidden" class="orgBoolInput" name="organization" value = "true" />
 
 	      <h2 class="orgName">Organization Name</h2>

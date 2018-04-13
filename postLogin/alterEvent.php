@@ -1,16 +1,13 @@
 <?php
 
-$conn = mysqli_connect('localhost', 'root', '', 'loveConnections');
-  if ($conn === false) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
+  require '../include/connection.php';
 session_start();
 
 if(isset($_POST['eventName'])) {
-  $eventName = trim($_POST['eventName'])  ?? '';
-  $eventDate = trim($_POST['eventDate'])  ?? '';
-  $numRounds = trim($_POST['numRounds'])  ?? '';
-  $location  = trim($_POST['eventLocation']) ?? '';
+  $eventName = trim(htmlspecialchars($_POST['eventName']))  ?? '';
+  $eventDate = trim(htmlspecialchars($_POST['eventDate'])) ?? '';
+  $numRounds = trim(htmlspecialchars($_POST['numRounds']))  ?? '';
+  $location  = trim(htmlspecialchars($_POST['eventLocation'])) ?? '';
   $id = $_POST['id'];
 
   $updateEventSQL = "UPDATE EventInfo set
