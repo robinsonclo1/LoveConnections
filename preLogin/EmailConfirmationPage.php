@@ -57,10 +57,11 @@
 					} else {
 						$passwordHash = password_hash($firstPassword, PASSWORD_DEFAULT);
 
-						$insertInfoSQL = "insert into MemberInfo (organization, organizationName, email, password, firstName, lastName)
-						VALUES('" . $organization . "', '" . $organizationName . "', '" . $firstEmail . "', '" . $passwordHash . "', '" . $firstName . "', '" . $lastName . "' );" ;
+            $insertInfoSQL = $conn->prepare("insert into MemberInfo (organization, organizationName, email, password, firstName, lastName)
+						VALUES(?, ?, ?, ?, ?, ?)");
+            $insertInfoSQL->bind_param("ssssss", $organization, $organizationName, $firstEmail, $passwordHash, $firstName, $lastName);
 
-            if ($conn->query($insertInfoSQL) === TRUE) {
+            if ($insertInfoSQL->execute() === TRUE) {
 							echo "<h2>Welcome to Love Connections!</h2>";
 							echo "<br><p>An email was sent to " . $firstEmail . ". Please follow the link to activate your account.</p>";
 							echo "<p>If you did not recieve an email, click here.</p>";

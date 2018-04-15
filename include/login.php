@@ -1,6 +1,6 @@
 <?php
 
-  require 'connection.php';
+  require '../include/connection.php';
 
   $email = "";
   $password = "";
