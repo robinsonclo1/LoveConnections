@@ -10,117 +10,66 @@ class Interests {
 
   // properties
   public $id;
-  public $basketball = false;
-  public $bowling = false;
-  public $cheer = false;
-  public $dance = false;
-  public $football = false;
-  public $golf = false;
-  public $gymnastics = false;
-  public $lacrosse = false;
-  public $soccer = false;
-  public $softball = false;
-  public $swimming = false;
-  public $tennis = false;
-  public $track = false;
-  public $volleyball = false;
-  public $mathematics = false;
-  public $science = false;
-  public $reading = false;
-  public $history = false;
-  public $languages = false;
-  public $agriculture = false;
-  public $church = false;
-  public $politics = false;
-  public $liberal = false;
-  public $conservative = false;
-  public $independent = false;
-  public $art = false;
-  public $music = false;
-  public $singing = false;
-  public $orchestra = false;
-  public $band = false;
-  public $acting = false;
-  public $fashion = false;
-  public $movies = false;
+  public $interestsArray = [];
+
   /**
    * Constructors are always named __construct, starting with two underscores.
    * Here we've added six parameters to initialize the six properties on our
    * object.
    */
-  public function __construct(
-      $memberId = null,
-      $basketball = false,
-      $bowling = false,
-      $cheer = false,
-      $dance = false,
-      $football = false,
-      $golf = false,
-      $gymnastics = false,
-      $lacrosse = false,
-      $soccer = false,
-      $softball = false,
-      $swimming = false,
-      $tennis = false,
-      $track = false,
-      $volleyball = false,
-      $mathematics = false,
-      $science = false,
-      $reading = false,
-      $history = false,
-      $languages = false,
-      $agriculture = false,
-      $church = false,
-      $politics = false,
-      $liberal = false,
-      $conservative = false,
-      $independent = false,
-      $art = false,
-      $music = false,
-      $singing = false,
-      $orchestra = false,
-      $band = false,
-      $acting = false,
-      $fashion = false,
-      $movies = false) {
-
+  public function __construct($memberId = null, $intArray = [
+    'basketball' => false,
+    'bowling' => false,
+    'cheer' => false,
+    'dance' => false,
+    'football' => false,
+    'golf' => false,
+    'gymnastics' => false,
+    'lacrosse' => false,
+    'soccer' => false,
+    'softball' => false,
+    'swimming' => false,
+    'tennis' => false,
+    'track' => false,
+    'volleyball' => false,
+    'mathematics' => false,
+    'science' => false,
+    'reading' => false,
+    'history' => false,
+    'languages' => false,
+    'agriculture' => false,
+    'church' => false,
+    'politics' => false,
+    'liberal' => false,
+    'conservative' => false,
+    'independent' => false,
+    'art' => false,
+    'music' => false,
+    'singing' => false,
+    'orchestra' => false,
+    'band' => false,
+    'acting' => false,
+    'fashion' => false,
+    'movies' => false,
+  ]) {
     $this->id = $memberId;
-    $this->basketball = $basketball;
-    $this->bowling = $bowling;
-    $this->cheer = $cheer;
-    $this->dance = $dance;
-    $this->football = $football;
-    $this->golf = $golf;
-    $this->gymnastics = $gymnastics;
-    $this->lacrosse = $lacrosse;
-    $this->soccer = $soccer;
-    $this->softball = $softball;
-    $this->swimming = $swimming;
-    $this->tennis = $tennis;
-    $this->track = $track;
-    $this->volleyball = $volleyball;
-    $this->mathematics = $mathematics;
-    $this->science = $science;
-    $this->reading = $reading;
-    $this->history = $history;
-    $this->languages = $languages;
-    $this->agriculture = $agriculture;
-    $this->church = $church;
-    $this->politics = $politics;
-    $this->liberal = $liberal;
-    $this->conservative = $conservative;
-    $this->independent = $independent;
-    $this->art = $art;
-    $this->music = $music;
-    $this->singing = $singing;
-    $this->band = $band;
-    $this->acting = $acting;
-    $this->fashion = $fashion;
-    $this->orchestra = $orchestra;
-    $this->movies = $movies;
+    $this->interestsArray = $intArray;
   }
 
-/*  public function getInterest($individualInterest) {
+  public function arraySetter($interests) {
+    foreach ($interests as $key => $value) {
+      //$objectKey = $this->key;
+      //$objectVal = $this->value;
+      //$this->interestsArray[$key]
+      if ($this->interestsArray[$key] = $key) {
+        $this->interestsArray[$key] = TRUE;
+      } else {
+        $this->interestsArray[$key] = FALSE;
+      }
+    }
+  }
+
+  /*public function getInterest($individualInterest) {
     return this->$individualInterest;
   }
 

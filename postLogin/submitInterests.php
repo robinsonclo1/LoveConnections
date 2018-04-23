@@ -5,25 +5,14 @@ require '../include/session.php';
 require '../include/interestsObject.php';
 
 $id = $_SESSION['id'];
-$interests = new Interests();
-$arr = (array) $interests;
+$interests = new Interests($id);
 
-foreach ($arr as $key => $value) {
-  echo "{$key} => {$value}<br>";
-}
+$tfarray = [];
 
-if(isset($_POST['submit'])) {
-  if (!empty($_POST['interestList'])) {
-    foreach($_POST['interestList'] as $checked) {
-      echo $checked;
-    }
-    var_dump($_POST['interestList']);
-  }
-  var_dump($_POST['interestList']);
+foreach ($_POST['interestList'] as $key => $value) {
+  $tfarray[$value] = true;
+}
+//print_r($tfarray);
+$interests->arraySetter($tfarray);
 
-}
-foreach($_POST['interestList'] as $checked) {
-  // $interests->updateClass($checked);
-}
-//echo $interests;
-?>
+//var_dump($interests);
