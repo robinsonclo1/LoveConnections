@@ -1,4 +1,6 @@
 <?php
+
+require '../include/connection.php';
 /**
  * Our game class, which does two things for us:
  *  1. It helps map data in PHP to our game table in MySQL simply by existing
@@ -12,11 +14,6 @@ class Interests {
   public $id;
   public $interestsArray = [];
 
-  /**
-   * Constructors are always named __construct, starting with two underscores.
-   * Here we've added six parameters to initialize the six properties on our
-   * object.
-   */
   public function __construct($memberId = null, $intArray = [
     'basketball' => false,
     'bowling' => false,
@@ -69,72 +66,51 @@ class Interests {
     }
   }
 
-  /*public function getInterest($individualInterest) {
-    return this->$individualInterest;
-  }
-
-  public function compareInterests($interest1, $interest2) {
-    if ($this->$interest1 = TRUE && $this->$interest2 = TRUE) {
-      return TRUE;
-    }
-  }
-
-  public function getAllInteretsAsArray() {
-    return (array) $this;
-  }
-  /**
-   * This function will generate the SQL necessary to save the game to the
-   * database. Depending on whether the game has an ID, it will return either
-   * an update (yes) or an insert (no) statement.
-   */
-  public function getQuery() {
-    // note the curly braces where we call a method inside the double quotes
-    if ($this->haveGameId()) {
-      return "update game
-        set title = '$this->title',
-        release_year = '$this->year',
-        beaten = {$this->beatenAsInt()},
-        system_id = $this->system,
-        developer_id = $this->developer
-        where game_id = $this->id";
+  public function getQuery($conn) {
+    $this->changeBoolToBinary();
+    if (!$this->checkMemberID($conn)) {
+      $insert = "insert into UserInterests (memberID_FK, " .
+        implode(',', array_keys($this->interestsArray)) .
+        ") VALUES (" . $this->id . "," . implode(',', $this->interestsArray) .
+        "); ";
+        echo $insert;
     } else {
-      return "insert game (system_id, developer_id, title, release_year, beaten)
-        values($this->system, $this->developer, '$this->title', '$this->year',
-        {$this->beatenAsInt()})";
+      $insert = "update UserInterests (memberID_FK, " .
+        implode(',', array_keys($this->interestsArray)) .
+        ") VALUES (" . $this->id . "," . implode(',', $this->interestsArray) .
+        "); ";
+
+        //UPDATE UserInterests SET football=1 WHERE memberID_FK = id;
+        echo $insert;
     }
   }
 
-  /**
-   * A simple function to determine whether we have a game ID or not on this
-   * game object.
-   */
-  private function haveMemberId() {
-    return isset($this->id) && is_numeric($this->id);
+  public function checkMemberId($conn) {
+     $sql = "Select ? From UserInterests";
+
+     if ($stmt = mysqli_prepare($conn, $sql)) {
+       mysqli_stmt_bind_param($stmt, "i", $id);
+
+       if (mysqli_stmt_execute($stmt)) {
+         mysqli_stmt_store_result($stmt);
+
+         if (mysqli_stmt_num_rows($stmt) == 1) {
+           return TRUE;
+         } else {
+           return FALSE;
+         }
+       }
+     }
   }
 
-  public function convertToArray() {
-    $interestsArray = array();
-    foreach ($this as $key => $value) {
-      if ($value = false) {
-        array_push($interestsArray, $key, 0);
-      } elseif ($value = true) {
-        array_push($interestsArray, $key, 1);
+  //won't need this anymore because I'm storing them in the link table...
+  public function changeBoolToBinary() {
+    foreach ($this->interestsArray as $key => $value) {
+      if ($value === TRUE) {
+        $this->interestsArray[$key] = 1;
+      } else {
+        $this->interestsArray[$key] = 0;
       }
     }
-    return $interestsArray;
-  }
-
-  private function updateClass($str) {
-    $this->$str = true;
-  }
-
-  private function updateSQL() {
-    $interestsList = convertToArray();
-    /* return "update UserInterests
-      set " .
-      foreach($key => $value) {
-        $key " = " $value ", ";
-      }
-      . "where memberID_FK = $this->id"; */
   }
 }

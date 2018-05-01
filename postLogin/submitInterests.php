@@ -12,7 +12,7 @@ $tfarray = [];
 foreach ($_POST['interestList'] as $key => $value) {
   $tfarray[$value] = true;
 }
-//print_r($tfarray);
-$interests->arraySetter($tfarray);
 
-//var_dump($interests);
+$interests->changeBoolToBinary();
+$interests->arraySetter($tfarray);
+$interests->getQuery($conn);

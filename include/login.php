@@ -2,6 +2,7 @@
 
   require '../include/connection.php';
 
+  $organization = "";
   $email = "";
   $password = "";
   $email_err = "";
@@ -23,16 +24,16 @@
 	  }
 
 	  if (empty($email_err) && empty($password_err)) {
-      $sql = "select memberID_PK, email, `password` FROM memberInfo WHERE email = ?;";
+      $sql = "select memberID_PK, organization, email, `password` FROM memberInfo WHERE email = ?;";
 
-      $stmt = loginCheck($conn, $sql, $id, $email, $password);
+      $stmt = loginCheck($conn, $sql, $id, $email, $password, $organization);
 
       mysqli_stmt_close($stmt);
 	  }
 	  mysqli_close($conn);
   }
 
-function loginCheck($conn, $sql, $id, $email, $password) {
+function loginCheck($conn, $sql, $id, $email, $password, $organization) {
   if ($stmt = mysqli_prepare($conn, $sql)) {
         mysqli_stmt_bind_param($stmt, "s", $param_email);
         $param_email = $email;
@@ -41,7 +42,7 @@ function loginCheck($conn, $sql, $id, $email, $password) {
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            mysqli_stmt_bind_result($stmt, $id, $email, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $organization, $email, $hashed_password);
 
             if (mysqli_stmt_fetch($stmt)){
 
@@ -49,6 +50,11 @@ function loginCheck($conn, $sql, $id, $email, $password) {
                 session_start();
                 $_SESSION['email'] = $email;
                 $_SESSION['id'] = $id;
+                if ($organization == 0) {
+                  $_SESSION['org'] = FALSE;
+                } else {
+                  $_SESSION['org'] = TRUE;
+                }
                 header("location: ../postLogin/welcome.php");
 
               } else {
