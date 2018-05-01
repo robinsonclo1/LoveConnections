@@ -70,23 +70,22 @@ function eventDateSorter($operator, $conn, $isOrg) {
 }
 
 function hasChangedInterests($conn) {
-  $sql = "SELECT * FROM memberInterestLink WHERE memberID_FK = ?;";
-  if ($stmt = mysqli_prepare($conn, $sql)) {
-    mysqli_stmt_bind_param($stmt, "s", $_SESSION['id']);
-    echo $_SESSION['id'];
-    if (mysqli_stmt_execute($stmt)) {
-      mysqli_stmt_store_result($stmt);
+  $sql = "SELECT * FROM memberInterestLink WHERE memberID_FK = " . $_SESSION['id'];
+  if ($stmt = $conn->prepare($sql)) {
 
-      if (mysqli_stmt_num_rows($stmt) >= 1) {
-        return TRUE;
-      } else {
-        return FALSE;
-      }
+    /* execute query */
+    $stmt->execute();
+
+    /* store result */
+    $stmt->store_result();
+
+    if ($stmt->num_rows >= 1) {
+      return TRUE;
     } else {
-      echo "exectuion error, sorry!";
+      return FALSE;
     }
-  } else {
-    echo "prepare error, sorry!";
+    /* close statement */
+    $stmt->close();
   }
 }
 ?>
@@ -138,7 +137,7 @@ function hasChangedInterests($conn) {
         <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 eventDetails sign-up-box">
           <?php
             if(hasChangedInterests($conn)) {
-              echo "<h3>It looks like you haven't selected your personal interests!</h3>";
+              echo "<h3>Modify your personal interests?</h3>";
             } else {
               echo "<h3>It looks like you haven't selected your personal interests!</h3>";
             }

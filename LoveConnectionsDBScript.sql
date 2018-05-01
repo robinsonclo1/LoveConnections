@@ -88,24 +88,27 @@ create table MemberInterestLink (
   foreign key(memberID_FK) references
     memberInfo(memberID_PK) on delete cascade,
   foreign key(interestID_FK) references
-    Interests(interestID_PK) on delete cascade 
+    Interests(interestID_PK) on delete cascade,
+  CONSTRAINT UC_memberInterest UNIQUE (memberID_FK, interestID_FK)
 );
-#drop table MemberInterestLink;
-select * from MemberInterestLink;
-select * from memberInfo;
-select * from eventInfo;
-select * from Interests;
 
-insert into MemberInterestLink (memberID_FK, interestID_FK) VALUES (5,2); 
-SELECT * FROM memberInterestLink WHERE memberID_FK = 1;
-insert into MemberInterestLink (memberID_FK, interestID_FK)
-SELECT m.memberID_PK, mi.interestID_FK
-FROM memberInfo m
-Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-Join interests i on (mi.interestID_FK = i.interestID_PK)
-WHERE i.interest = 'football' AND memberID_FK = 2;
+#select * from MemberInterestLink;
+#select * from memberInfo;
+#select * from eventInfo;
+#select * from Interests;
+#SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
+#insert into MemberInterestLink (memberID_FK, interestID_FK) VALUES (3,2); 
+#SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
+
+#insert into MemberInterestLink (memberID_FK, interestID_FK)
+#SELECT m.memberID_PK, mi.interestID_FK
+#FROM memberInfo m
+#Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
+#Join interests i on (mi.interestID_FK = i.interestID_PK)
+#WHERE i.interest = 'football' AND memberID_FK = 2;
 
 SELECT m.memberID_PK, mi.interestID_FK, i.interest
 FROM memberInfo m
 Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
 Join interests i on (mi.interestID_FK = i.interestID_PK);
+#WHERE i.interest = 'bowling' AND memberID_PK = 1;
