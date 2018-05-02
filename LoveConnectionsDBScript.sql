@@ -48,39 +48,18 @@ create table Interests (
   interest VARCHAR(255) NOT NULL
 );
 
-insert into Interests (interest) VALUES ('basketball');
-insert into Interests (interest) VALUES ('bowling');
-insert into Interests (interest) VALUES ('cheer');
-insert into Interests (interest) VALUES ('dance');
-insert into Interests (interest) VALUES ('football');
-insert into Interests (interest) VALUES ('golf');
-insert into Interests (interest) VALUES ('gymnastics');
-insert into Interests (interest) VALUES ('lacrosse');
-insert into Interests (interest) VALUES ('soccer');
-insert into Interests (interest) VALUES ('softball');
-insert into Interests (interest) VALUES ('swimming');
-insert into Interests (interest) VALUES ('tennis');
-insert into Interests (interest) VALUES ('track');
-insert into Interests (interest) VALUES ('volleyball');
-insert into Interests (interest) VALUES ('mathematics');
-insert into Interests (interest) VALUES ('science');
-insert into Interests (interest) VALUES ('reading');
-insert into Interests (interest) VALUES ('history');
-insert into Interests (interest) VALUES ('languages');
-insert into Interests (interest) VALUES ('agriculture');
-insert into Interests (interest) VALUES ('church');
-insert into Interests (interest) VALUES ('politics');
-insert into Interests (interest) VALUES ('liberal');
-insert into Interests (interest) VALUES ('conservative');
-insert into Interests (interest) VALUES ('independent');
-insert into Interests (interest) VALUES ('art');
-insert into Interests (interest) VALUES ('music');
-insert into Interests (interest) VALUES ('singing');
-insert into Interests (interest) VALUES ('orchestra');
-insert into Interests (interest) VALUES ('band');
-insert into Interests (interest) VALUES ('acting');
-insert into Interests (interest) VALUES ('fashion');
-insert into Interests (interest) VALUES ('movies');
+insert into Interests (interest) VALUES 
+	('basketball'),('bowling'),('cheer'),
+	('dance'),('football'),('golf'),
+    ('gymnastics'),('lacrosse'),('soccer'),
+    ('softball'),('swimming'),('tennis'),
+    ('track'),('volleyball'),('mathematics'),
+    ('science'),('reading'),('history'),
+    ('languages'),('agriculture'),('church'),
+    ('politics'),('liberal'),('conservative'),
+    ('independent'),('art'),('music'),
+    ('singing'),('orchestra'),('band'),
+    ('acting'),('fashion'),('movies');
 
 create table MemberInterestLink (
   memberID_FK INT(6) UNSIGNED NOT NULL,
@@ -92,12 +71,64 @@ create table MemberInterestLink (
   CONSTRAINT UC_memberInterest UNIQUE (memberID_FK, interestID_FK)
 );
 
+create table MemberEventLink (
+  memberID_FK INT(6) UNSIGNED NOT NULL,
+  eventID_FK INT(6) UNSIGNED NOT NULL,
+  foreign key(memberID_FK) references
+    memberInfo(memberID_PK) on delete cascade,
+  foreign key(eventID_FK) references
+    eventInfo(eventID_PK) on delete cascade,
+  CONSTRAINT UC_memberEvent UNIQUE (memberID_FK, eventID_FK)
+);
+
+select * from MemberEventLink;
+insert into memberEventLink
+    (memberID_FK, eventID_FK)
+	   VALUES(1, 1);
+
+create table intCategories (
+  categoryID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `name` varchar(255) NOT NULL
+);
+
+insert into intCategories (`name`) VALUES 
+	('Athletics'), ('Academics'), 
+    ('Religion & Politics'), ('Arts & Music');
+
+create table interestCategoriesLink (
+  interestID_FK INT(6) UNSIGNED NOT NULL,
+  categoryID_FK INT(6) UNSIGNED NOT NULL,
+  foreign key(categoryID_FK) references
+    intCategories(categoryID_PK) on delete cascade,
+  foreign key(interestID_FK) references
+    Interests(interestID_PK) on delete cascade,
+  CONSTRAINT UC_interestCategory UNIQUE (categoryID_FK, interestID_FK)
+);
+
+insert into interestCategoriesLink VALUES 
+	(1,1), (2,1), (3,1), (4,1), (5,1),
+    (6,1), (7,1), (8,1), (9,1), (10,1),
+    (11,1), (12,1), (13,1), (14,1), (15,2),
+    (16,4), (17,3), (18,2), (19,2), (20,2),
+    (21,3), (22,3), (23,3), (24,3), (25,3),
+    (26,4), (27,4), (28,4), (29,4), (30,4),
+    (31,4), (32,4), (33,4);
+
+
+SELECT i.interest, c.`name`
+            FROM memberInfo m
+            Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
+            Join interests i on (mi.interestID_FK = i.interestID_PK)
+            Join interestCategoriesLink ic on (ic.interestID_FK = i.interestID_PK)
+            Join intCategories c on (ic.categoryID_FK = c.categoryID_PK)
+            WHERE memberID_PK = 1;
+
 #select * from MemberInterestLink;
 #select * from memberInfo;
 #select * from eventInfo;
 #select * from Interests;
 #SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
-#insert into MemberInterestLink (memberID_FK, interestID_FK) VALUES (3,2); 
+#insert into MemberInterestLink (memberID_FK, interestID_FK) VALUES (5,2); 
 #SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
 
 #insert into MemberInterestLink (memberID_FK, interestID_FK)
@@ -110,5 +141,5 @@ create table MemberInterestLink (
 SELECT m.memberID_PK, mi.interestID_FK, i.interest
 FROM memberInfo m
 Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-Join interests i on (mi.interestID_FK = i.interestID_PK);
-#WHERE i.interest = 'bowling' AND memberID_PK = 1;
+Join interests i on (mi.interestID_FK = i.interestID_PK)
+WHERE i.interest = 'bowling' AND memberID_PK = 3;
