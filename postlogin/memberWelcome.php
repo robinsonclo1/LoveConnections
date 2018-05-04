@@ -4,14 +4,16 @@ require '../include/session.php';
 require "../include/topnav.php";
 
 $isOrg = $_SESSION['org'];
-
+if (isset($_GET['success'])) {
+  echo "<h1>You registered for the event</h1>";
+}
 if ($isOrg) {
   header("location: ../postLogin/organizationWelcome.php");
 }
 
 function getEventDetails($conn) {
 $records = [];
-  if (!empty($_GET)) {
+  if (!empty($_GET) && isset($_GET['id']) ) {
     $getEvents = "Select eventName, eventDate, eventLocation, numRounds FROM eventInfo WHERE " .  $_GET['id'] . " = eventID_PK;";
 
     $result = $conn->query($getEvents);
@@ -179,14 +181,14 @@ if ($stmt = $conn->prepare($sql)) {
 
           <?php
           } else { ?>
-            <p>Click on an e vent to see more details.</p>
+            <p>Click on an event to see more details.</p>
         <?php } ?>
 
     </div>
   </div>
 </div>
 
-<!-- Delete Event Modal -->
+<!-- RSVP Event Modal -->
 <div id="RSVPModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -200,10 +202,10 @@ if ($stmt = $conn->prepare($sql)) {
       <div class="modal-body">
         <h4>Event Details</h4>
 
-        <form class="eventForm"  id="RSVPEventForm" action="../postLogin/RSVPForEvent.php" method="POST">
+        <form class="RSVPeventForm"  id="RSVPEventForm" action="../postLogin/RSVPForEvent.php" method="POST">
           <div class="detailsModalContainer">
-            <input type="hidden" name="id" id="eventID" value="<?php $_GET['id']?>" />
-            <input type="hidden" name="memberID" id="memberID" value="<?php $_SESSION['id'] ?>"/>
+            <input type="hidden" name="eventID" id="eventID" value="<?= $_GET['id']?>" />
+            <input type="hidden" name="memberID" id="memberID" value="<?= $_SESSION['id'] ?>"/>
             <label>Event Name:</label> <?=$name?><br>
             <label>Date:</label> <?=$displayDate?><br>
             <label>Location:</label> <?=$location?><br>
@@ -211,8 +213,9 @@ if ($stmt = $conn->prepare($sql)) {
         </form>
       </div>
 
-      <div class="modal-footer">  
+      <div class="modal-footer">
         <button type="button" class="btn btn-default submit" id="RSVPForEvent">Confirm RSVP</button>
+        <button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal">Never Mind</button>
       </div>
 
     </div>

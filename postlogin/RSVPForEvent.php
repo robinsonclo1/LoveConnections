@@ -3,21 +3,13 @@
 require '../include/connection.php';
 session_start();
 
-if(isset($_GET['id'])) {
-  $memberId = $_SESSION['id'];
-  $eventId = $_GET['id'];
-  $sql = $conn->prepare("insert into memberEventLink
+$memberId = $_POST['memberID'];
+$eventId = $_POST['eventID'];
+
+$sql = "INSERT INTO memberEventLink
     (memberID_FK, eventID_FK)
-	   VALUES(?, ?)");
-  $sql->bind_param("ii", $memberId, $eventId);
+	   VALUES($memberId, $eventId)";
 
+$conn->query($sql);
 
-	if ($sql->execute() === TRUE) {
-    $sql->Close(); 
-		echo "<h2>Successfully RSVPed</h2>";
-	} else {
-		echo "<p>Unfortunately an error occured. Please RSVP again.</p>";
-	}
-}  else {
-  echo "<p>Unfortunately an error occured. </p>";
-}
+header("location: ../postLogin/memberWelcome.php?success=1");

@@ -68,6 +68,9 @@ $(document).ready(function(){
       $("#deleteEvent").on('click', function() {
         $("#deleteEventForm").submit();
       });
+      $("#RSVPForEvent").on('click', function() {
+        $("#RSVPEventForm").submit();
+      });
 
 
   //Nice scroll

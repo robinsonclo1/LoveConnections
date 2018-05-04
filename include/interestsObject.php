@@ -1,20 +1,15 @@
 <?php
 
 require '../include/connection.php';
-/**
- * Our game class, which does two things for us:
- *  1. It helps map data in PHP to our game table in MySQL simply by existing
- *     as as datatype with properties that match the columns.
- *  2. It has some validation and helper methods to assist with saving data
- *     to MySQL.
- */
+
 class Interests {
 
   // properties
+  public $conn
   public $id;
   public $interestsArray = [];
 
-  public function __construct($memberId = null, $intArray = [
+  public function __construct($conn, $memberId = null, $intArray = [
     'basketball' => false,
     'bowling' => false,
     'cheer' => false,
@@ -49,6 +44,7 @@ class Interests {
     'fashion' => false,
     'movies' => false,
   ]) {
+    $this->conn = $conn
     $this->id = $memberId;
     $this->interestsArray = $intArray;
   }
@@ -66,9 +62,9 @@ class Interests {
     }
   }
 
-  public function getQuery($conn) {
+  public function getQuery() {
     $this->changeBoolToBinary();
-    if (!$this->checkMemberID($conn)) {
+    if (!$this->checkMemberID($this->conn)) {
       $insert = "insert into UserInterests (memberID_FK, " .
         implode(',', array_keys($this->interestsArray)) .
         ") VALUES (" . $this->id . "," . implode(',', $this->interestsArray) .
@@ -85,10 +81,10 @@ class Interests {
     }
   }
 
-  public function checkMemberId($conn) {
+  public function checkMemberId() {
      $sql = "Select ? From UserInterests";
 
-     if ($stmt = mysqli_prepare($conn, $sql)) {
+     if ($stmt = mysqli_prepare($this->conn, $sql)) {
        mysqli_stmt_bind_param($stmt, "i", $id);
 
        if (mysqli_stmt_execute($stmt)) {
