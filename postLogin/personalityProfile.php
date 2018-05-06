@@ -1,7 +1,8 @@
 <?php
 require '../include/connection.php';
 require '../include/session.php';
-require "../include/topnav.php" ;
+require '../include/topnav.php' ;
+require '../include/interestsObject.php';
 
 function interestButton($interest){
   echo "<label class='interest-container container'>" . ucfirst($interest) . "

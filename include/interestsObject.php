@@ -58,6 +58,7 @@ class Interests {
     $numReligion = 5;
     $numArts = 8;
     $i=0;
+    $this->popArraySql();
     echo "<div class='col-xs-12'>
             <div class='col-md-4 col-sm-6' style='text-align:center;'>
               <div id='athletics'>
@@ -103,17 +104,30 @@ class Interests {
       }
     }
   }
-  public function arraySetter($interests) {
-    foreach ($interests as $key => $value) {
-      //$objectKey = $this->key;
-      //$objectVal = $this->value;
-      //$this->interestsArray[$key]
-      if ($this->interestsArray[$key] = $key) {
-        $this->interestsArray[$key] = TRUE;
-      } else {
-        $this->interestsArray[$key] = FALSE;
-      }
+
+  public function popArraySql() {
+    $memInterests = [];
+    $sql = "SELECT i.interest
+              FROM memberInfo m
+              Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
+              Join interests i on (mi.interestID_FK = i.interestID_PK)
+              WHERE memberID_PK = $this->id";
+    $result = $this->conn->query($sql);
+    foreach ($result as $row) {
+      array_push($memInterests, $row['interest']);
     }
+
+   foreach ($this->interestsArray as $key => $value) {
+     for ($i=0; $i<sizeof($memInterests); $i++) {
+       if ($memInterests[$i] === $key) {
+         $this->interestsArray[$key] = true;
+       }
+     }
+   }
+  }
+
+  public function modifyArray() {
+    
   }
 
   public function getQuery() {
