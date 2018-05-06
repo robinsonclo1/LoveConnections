@@ -5,7 +5,7 @@ require '../include/connection.php';
 class Interests {
 
   // properties
-  public $conn
+  public $conn;
   public $id;
   public $interestsArray = [];
 
@@ -44,11 +44,65 @@ class Interests {
     'fashion' => false,
     'movies' => false,
   ]) {
-    $this->conn = $conn
+    $this->conn = $conn;
     $this->id = $memberId;
     $this->interestsArray = $intArray;
   }
 
+  public function createAndPopulateCheckboxes() {
+    //This is a terrible way to do this, but running low on time.
+    //I separated them into categories by counting the number of items in each.
+    //Athletics:
+    $numAthletics = 14;
+    $numAcademic = 6;
+    $numReligion = 5;
+    $numArts = 8;
+    $i=0;
+    echo "<div class='col-xs-12'>
+            <div class='col-md-4 col-sm-6' style='text-align:center;'>
+              <div id='athletics'>
+                <h3>Athletics</h3>";
+                $this->sectionOfCheckboxes($i, $numAthletics);
+    echo "    </div>
+            </div>
+            <div class='col-md-4 col-sm-6' style='text-align:center;'>
+              <div id='academic'>
+              <h3>Academic</h3>";
+              $this->sectionOfCheckboxes($numAthletics, $numAthletics+$numAcademic);
+    echo    "</div>
+             <div id='community'>
+               <h3>Religion & Politics</h3>";
+               $this->sectionOfCheckboxes($numAthletics+$numAcademic, $numAthletics+$numAcademic+$numReligion);
+    echo "  </div>
+          </div>
+          <div class='col-md-4 col-sm-12' style='text-align:center;'>
+            <div id='artistic'>
+              <h3>Arts & Music</h3>";
+              $this->sectionOfCheckboxes($numAthletics+$numAcademic+$numReligion, $numAthletics+$numAcademic+$numReligion+$numArts);
+   echo "   </div>
+          </div>";
+  }
+
+  public function sectionOfCheckboxes($startValue, $endValue) {
+    $i = 0;
+    foreach ($this->interestsArray as $key => $value) {
+      $i++;
+      if($i>$startValue && $startValue<$endValue) {
+        if ($value === true) {
+          echo "<label class='interest-container container'>" . ucfirst($key) . "
+                  <input type='checkbox' name='interestList[]' id='$key' value='$key' checked>
+                  <span class='checkmark'></span>
+                </label>";
+        } else {
+          echo "<label class='interest-container container'>" . ucfirst($key) . "
+                  <input type='checkbox' name='interestList[]' id='$key' value='$key'>
+                  <span class='checkmark'></span>
+                </label>";
+        }
+        $startValue++;
+      }
+    }
+  }
   public function arraySetter($interests) {
     foreach ($interests as $key => $value) {
       //$objectKey = $this->key;

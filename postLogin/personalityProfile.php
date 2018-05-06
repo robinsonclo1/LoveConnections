@@ -23,66 +23,13 @@ function interestButton($interest){
         <h1>Select your interests</h1>
         <form  class="col-xs-12" action="../postLogin/submitInterests.php" method="post">
           <div class="col-xs-12">
-          <div class="col-md-4 col-sm-6" style="text-align:center;">
-        	  <div id="athletics">
-              <h3>Athletics</h3>
-          	  <?php
-                interestButton('basketball');
-                interestButton('bowling');
-                interestButton('cheer');
-                interestButton('dance');
-                interestButton('football');
-                interestButton('golf');
-                interestButton('gymnastics');
-                interestButton('lacrosse');
-                interestButton('soccer');
-                interestButton('softball');
-                interestButton('swimming');
-                interestButton('tennis');
-                interestButton('track');
-                interestButton('volleyball');
-              ?>
-          	</div>
-          </div>
-          <div class="col-md-4 col-sm-6" style="text-align:center;">
-    				<div id="academic">
-  				    <h3>Academic</h3>
+            <div class="col-xs-12">
               <?php
-                interestButton('mathematics');
-                interestButton('science');
-                interestButton('reading');
-                interestButton('history');
-                interestButton('languages');
-                interestButton('agriculture');
-              ?>
-    				</div>
-            <div id="community">
-              <h3>Religion & Politics</h3>
-              <?php
-                interestButton('church');
-                interestButton('politics');
-                interestButton('liberal');
-                interestButton('conservative');
-                interestButton('independent');
+                $interests = new Interests($conn, $_SESSION['id']);
+                $interests->createAndPopulateCheckboxes();
               ?>
             </div>
           </div>
-          <div class="col-md-4 col-sm-12" style="text-align:center;">
-    				<div id="artistic">
-    				  <h3>Arts & Music</h3>
-              <?php
-                interestButton('art');
-                interestButton('music');
-                interestButton('singing');
-                interestButton('orchestra');
-                interestButton('band');
-                interestButton('acting');
-                interestButton('fashion');
-                interestButton('movies');
-              ?>
-    				</div>
-    			</div>
-        </div>
         <div class="buttonHolder">
           <button class="btn btn-primary" type="submit">Submit</button>
           <input class="btn btn-primary" type="reset">
