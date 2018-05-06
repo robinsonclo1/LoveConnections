@@ -1,18 +1,15 @@
 <?php
-
-require '../include/connection.php';
-require '../include/session.php';
 require '../include/interestsObject.php';
+require '../include/session.php';
 
-$id = $_SESSION['id'];
-$interests = new Interests($id);
+$interests = $_SESSION['interests'];
 
 $tfarray = [];
 
 foreach ($_POST['interestList'] as $key => $value) {
-  $tfarray[$value] = true;
+  array_push($tfarray, $value);
 }
 
-$interests->changeBoolToBinary();
-$interests->arraySetter($tfarray);
-$interests->getQuery($conn);
+$interests->modifyArray($tfarray);
+//$interests->insertUpdateQuery();
+header("location: ../postLogin/personalityProfile.php?success=1");

@@ -1,14 +1,16 @@
 <?php
-require '../include/connection.php';
-require '../include/session.php';
-require '../include/topnav.php' ;
 require '../include/interestsObject.php';
+require '../include/session.php';
+require '../include/connection.php';
+require '../include/topnav.php' ;
 
-function interestButton($interest){
-  echo "<label class='interest-container container'>" . ucfirst($interest) . "
-          <input type='checkbox' name='interestList[]' id='$interest' value='$interest'>
-          <span class='checkmark'></span>
-        </label>";
+if (isset($_GET['success'])) {
+  echo "<div class='alert alert-success col-sm-10 col-sm-offset-1' role='alert'>
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+          </button>
+          Settings Succesfully Updated
+        </div>";
 }
 ?>
 
@@ -26,14 +28,18 @@ function interestButton($interest){
           <div class="col-xs-12">
             <div class="col-xs-12">
               <?php
-                $interests = new Interests($conn, $_SESSION['id']);
+                if (!isset($_SESSION['interests'])) {
+                  $interests = new Interests($conn, $_SESSION['id']);
+                  $_SESSION['interests'] = $interests;
+                } else {
+                  $interests = $_SESSION['interests'];
+                }
                 $interests->createAndPopulateCheckboxes();
               ?>
             </div>
           </div>
         <div class="buttonHolder">
           <button class="btn btn-primary" type="submit">Submit</button>
-          <input class="btn btn-primary" type="reset">
         </div>
         </form>
       </div>

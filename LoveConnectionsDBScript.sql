@@ -85,6 +85,7 @@ select * from MemberEventLink;
 insert into memberEventLink
     (memberID_FK, eventID_FK)
 	   VALUES(1, 1);
+       
 
 create table intCategories (
   categoryID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -142,4 +143,17 @@ SELECT m.memberID_PK, mi.interestID_FK, i.interest
 FROM memberInfo m
 Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
 Join interests i on (mi.interestID_FK = i.interestID_PK)
-WHERE i.interest = 'bowling' AND memberID_PK = 3;
+WHERE memberID_PK = 3;
+
+#INSERT INTO MemberInterestLink (memberID_FK, interestID_FK)
+SELECT m.memberID_PK, mi.interestID_FK
+FROM memberInfo m
+Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
+Join interests i on (mi.interestID_FK = i.interestID_PK)
+WHERE i.interest = 'basketball' AND m.memberID_FK = 1;
+
+INSERT INTO MemberInterestLink (memberID_FK, interestID_FK) VALUES
+(1, 3);
+
+
+select * from MemberInterestLink;

@@ -1,7 +1,5 @@
 <?php
 
-require '../include/connection.php';
-
 class Interests {
 
   // properties
@@ -47,18 +45,17 @@ class Interests {
     $this->conn = $conn;
     $this->id = $memberId;
     $this->interestsArray = $intArray;
+    $this->popArraySql();
   }
 
   public function createAndPopulateCheckboxes() {
-    //This is a terrible way to do this, but running low on time.
+    //This is a terrible way to do this, but I'm running low on time.
     //I separated them into categories by counting the number of items in each.
-    //Athletics:
     $numAthletics = 14;
     $numAcademic = 6;
     $numReligion = 5;
     $numArts = 8;
     $i=0;
-    $this->popArraySql();
     echo "<div class='col-xs-12'>
             <div class='col-md-4 col-sm-6' style='text-align:center;'>
               <div id='athletics'>
@@ -117,18 +114,45 @@ class Interests {
       array_push($memInterests, $row['interest']);
     }
 
-   foreach ($this->interestsArray as $key => $value) {
-     for ($i=0; $i<sizeof($memInterests); $i++) {
-       if ($memInterests[$i] === $key) {
-         $this->interestsArray[$key] = true;
-       }
-     }
-   }
+    foreach ($this->interestsArray as $key => $value) {
+      for ($i=0; $i<sizeof($memInterests); $i++) {
+        if ($memInterests[$i] === $key) {
+          $this->interestsArray[$key] = true;
+        }
+      }
+    }
   }
 
-  public function modifyArray() {
-    
+  public function modifyArray($arr) {
+    foreach ($this->interestsArray as $key => $value) {
+      for ($i=0; $i<sizeof($arr); $i++) {
+        if ($arr[$i] === $key) {
+          $this->interestsArray[$key] = true;
+          break;
+        } else if ($i == sizeof($arr) - 1) {
+          var_dump($key);
+          $this->interestsArray[$key] = false;
+        }
+      }
+    }
   }
+
+  /*public function insertUpdateQuery() {
+    foreach ($this->interestsArray as $key => $val) {
+      echo $key . "<br>";
+      $select = "SELECT interestID_PK from interests where interest = '" . $key . "'";
+      echo $select;
+      $result = $this->conn->query($select);
+      var_dump($result);
+      if ($val === true) {
+        $insert = "INSERT INTO MemberInterestLink (memberID_FK, interestID_FK) VALUES ($this->id, $interestKey)";
+        $this->conn->query($insert);
+      } else {
+        $delete = "DELETE FROM MemberInterestLink WHERE interestID_FK = $interestKey";
+        $this->conn->query($delete);
+      }
+    }
+  }*/
 
   public function getQuery() {
     $this->changeBoolToBinary();
@@ -167,14 +191,4 @@ class Interests {
      }
   }
 
-  //won't need this anymore because I'm storing them in the link table...
-  public function changeBoolToBinary() {
-    foreach ($this->interestsArray as $key => $value) {
-      if ($value === TRUE) {
-        $this->interestsArray[$key] = 1;
-      } else {
-        $this->interestsArray[$key] = 0;
-      }
-    }
-  }
 }
