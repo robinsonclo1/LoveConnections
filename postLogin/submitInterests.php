@@ -1,6 +1,7 @@
 <?php
 require '../include/interestsObject.php';
 require '../include/session.php';
+require '../include/connection.php';
 
 $interests = $_SESSION['interests'];
 
@@ -11,5 +12,5 @@ foreach ($_POST['interestList'] as $key => $value) {
 }
 
 $interests->modifyArray($tfarray);
-//$interests->insertUpdateQuery();
+$interests->insertUpdateQuery($conn);
 header("location: ../postLogin/personalityProfile.php?success=1");

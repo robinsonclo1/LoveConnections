@@ -130,65 +130,28 @@ class Interests {
           $this->interestsArray[$key] = true;
           break;
         } else if ($i == sizeof($arr) - 1) {
-          var_dump($key);
           $this->interestsArray[$key] = false;
         }
       }
     }
   }
 
-  /*public function insertUpdateQuery() {
+  public function insertUpdateQuery($conn) {
+    var_dump($conn);
     foreach ($this->interestsArray as $key => $val) {
       echo $key . "<br>";
       $select = "SELECT interestID_PK from interests where interest = '" . $key . "'";
-      echo $select;
-      $result = $this->conn->query($select);
-      var_dump($result);
+      $result = $conn->query($select);
+      foreach ($result as $row) {
+        $interestKey = $row['interestID_PK'];
+      }
       if ($val === true) {
         $insert = "INSERT INTO MemberInterestLink (memberID_FK, interestID_FK) VALUES ($this->id, $interestKey)";
-        $this->conn->query($insert);
+        $conn->query($insert);
       } else {
-        $delete = "DELETE FROM MemberInterestLink WHERE interestID_FK = $interestKey";
-        $this->conn->query($delete);
+        $delete = "DELETE FROM MemberInterestLink WHERE interestID_FK = $interestKey AND memberID_FK = $this->id";
+        $conn->query($delete);
       }
     }
-  }*/
-
-  public function getQuery() {
-    $this->changeBoolToBinary();
-    if (!$this->checkMemberID($this->conn)) {
-      $insert = "insert into UserInterests (memberID_FK, " .
-        implode(',', array_keys($this->interestsArray)) .
-        ") VALUES (" . $this->id . "," . implode(',', $this->interestsArray) .
-        "); ";
-        echo $insert;
-    } else {
-      $insert = "update UserInterests (memberID_FK, " .
-        implode(',', array_keys($this->interestsArray)) .
-        ") VALUES (" . $this->id . "," . implode(',', $this->interestsArray) .
-        "); ";
-
-        //UPDATE UserInterests SET football=1 WHERE memberID_FK = id;
-        echo $insert;
-    }
   }
-
-  public function checkMemberId() {
-     $sql = "Select ? From UserInterests";
-
-     if ($stmt = mysqli_prepare($this->conn, $sql)) {
-       mysqli_stmt_bind_param($stmt, "i", $id);
-
-       if (mysqli_stmt_execute($stmt)) {
-         mysqli_stmt_store_result($stmt);
-
-         if (mysqli_stmt_num_rows($stmt) == 1) {
-           return TRUE;
-         } else {
-           return FALSE;
-         }
-       }
-     }
-  }
-
 }

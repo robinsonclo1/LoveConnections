@@ -5,7 +5,12 @@ require "../include/topnav.php";
 
 $isOrg = $_SESSION['org'];
 if (isset($_GET['success'])) {
-  echo "<h1>You registered for the event</h1>";
+  echo "<div class='alert alert-success col-sm-10 col-sm-offset-1' role='alert'>
+          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+          </button>
+          You Succesfully Registered for the Event!
+        </div>";;
 }
 if ($isOrg) {
   header("location: ../postLogin/organizationWelcome.php");
