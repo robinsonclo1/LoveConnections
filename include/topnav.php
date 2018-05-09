@@ -10,8 +10,8 @@
 </head>
 
 <?php
-  require '../include/connection.php';
-  require '../include/login.php';
+require '../include/connection.php';
+require '../include/login.php';
 
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['email']) || empty($_SESSION['email'])){ ?>
@@ -36,7 +36,7 @@ if(!isset($_SESSION['email']) || empty($_SESSION['email'])){ ?>
             <input type="submit" id="submit" value="Log in">
           </fieldset>
           <p>Don't have an account? </p>
-          <a href="preLogin/signUpPage.php">Sign up now</a>.
+          <a href="../preLogin/signUpPage.php">Sign up now</a>.
         </form>
       </div>
 
@@ -51,6 +51,7 @@ if(!isset($_SESSION['email']) || empty($_SESSION['email'])){ ?>
 	  <div class="topnav">
 	    <h1 class="col-md-6 col-sm-6 siteName"><a href='../postLogin/welcome.php'>Love Connections</a></h1>
 		  <nav class="col-sm-offset-4 col-md-2 col-sm-2" id="siteNav">
+        <li id="changeImage"><a href="../postLogin/changeImage.php">Profile Picture</a></li>
   		  <li id="changeSettings"><a href="../postLogin/changeSettings.php">Change Settings</a></li>
 		    <li id="logout"><a href="#" data-toggle="modal" data-target="#logOutModal" id="logout-trigger">Log Out</a></li>
     </nav>

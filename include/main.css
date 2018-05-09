@@ -220,6 +220,11 @@ nav li #login-content {
 
 /* Welcome Page and front end styling */
 
+body {
+	background-image:url('../include/background-flowers4.png');
+}
+
+
 body h1{
 	text-align: center;
 	display: fixed;
@@ -288,6 +293,29 @@ body p{
 }
 
 /* Front pages */
+
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-image: url('../include/barScene2.png');
+  background-size: cover;
+  height: 450px;
+  text-shadow: 0.5px 0.25px 0.25px #000000;
+}
+
+.jumbotron h2 {
+  font-size: 60px;
+  font-weight: 700;
+  color: rgb(255,110,176);
+  opacity: 1;
+  margin: 0;
+}
+
+.jumbotron h3 {
+  margin: 0 0 20px;
+  color: #fff;
+}
 
 .sign-up-box {
   background-color:rgba(255,100,171,.75);
@@ -439,11 +467,14 @@ body p{
   padding: 10px 20px 20px 20px;
 }
 
+.interest-section {
+  text-align: right;
+}
 /* Customize the label (the container) */
 .interest-container  {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 30px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 18px;
@@ -470,7 +501,7 @@ body p{
 .checkmark {
   position: absolute;
   top: 1px;
-	left: 25%;
+	left: 5%;
   -webkit-transform: translateX(-25%);
   transform: translateX(-25%);
   height: 25px;
@@ -511,4 +542,13 @@ body p{
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+#upload {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }

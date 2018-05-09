@@ -81,12 +81,6 @@ create table MemberEventLink (
   CONSTRAINT UC_memberEvent UNIQUE (memberID_FK, eventID_FK)
 );
 
-select * from MemberEventLink;
-insert into memberEventLink
-    (memberID_FK, eventID_FK)
-	   VALUES(1, 1);
-       
-
 create table intCategories (
   categoryID_PK INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   `name` varchar(255) NOT NULL
@@ -115,45 +109,18 @@ insert into interestCategoriesLink VALUES
     (26,4), (27,4), (28,4), (29,4), (30,4),
     (31,4), (32,4), (33,4);
 
+create table profilePictures(
+	pictureID_PK int unsigned auto_increment primary key,
+    memberID_FK int(6) UNSIGNED NOT NULL,
+    filename nvarchar(255),
+    filetype nvarchar(50),
+    filedata longblob,
+    date_created datetime default current_timestamp,
+  foreign key(memberID_FK) references
+    memberInfo(memberID_PK) on delete cascade
+);
 
-SELECT i.interest, c.`name`
-            FROM memberInfo m
-            Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-            Join interests i on (mi.interestID_FK = i.interestID_PK)
-            Join interestCategoriesLink ic on (ic.interestID_FK = i.interestID_PK)
-            Join intCategories c on (ic.categoryID_FK = c.categoryID_PK)
-            WHERE memberID_PK = 1;
+#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'Barley\'s Brewing', '467 N High St, Columbus, OH 43215', 4);
+#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'The Three Legged Mare', '401 N Front St #150, Columbus, OH 43215', 5);
+#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'Marcella\'s', '615 N High St, Columbus, OH 43215', 3);
 
-#select * from MemberInterestLink;
-#select * from memberInfo;
-#select * from eventInfo;
-#select * from Interests;
-#SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
-#insert into MemberInterestLink (memberID_FK, interestID_FK) VALUES (5,2); 
-#SELECT * FROM memberInterestLink WHERE memberID_FK = 5;
-
-#insert into MemberInterestLink (memberID_FK, interestID_FK)
-#SELECT m.memberID_PK, mi.interestID_FK
-#FROM memberInfo m
-#Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-#Join interests i on (mi.interestID_FK = i.interestID_PK)
-#WHERE i.interest = 'football' AND memberID_FK = 2;
-
-SELECT m.memberID_PK, mi.interestID_FK, i.interest
-FROM memberInfo m
-Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-Join interests i on (mi.interestID_FK = i.interestID_PK)
-WHERE memberID_PK = 3;
-
-#INSERT INTO MemberInterestLink (memberID_FK, interestID_FK)
-SELECT m.memberID_PK, mi.interestID_FK
-FROM memberInfo m
-Join MemberInterestLink mi on (mi.memberID_FK = m.memberID_PK)
-Join interests i on (mi.interestID_FK = i.interestID_PK)
-WHERE i.interest = 'basketball' AND m.memberID_FK = 1;
-
-INSERT INTO MemberInterestLink (memberID_FK, interestID_FK) VALUES
-(1, 3);
-
-
-select * from MemberInterestLink;

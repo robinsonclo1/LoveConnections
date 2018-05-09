@@ -39,7 +39,7 @@ if (isset($_GET['success'])) {
             </div>
           </div>
         <div class="buttonHolder">
-          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary" type="submit">Save</button>
         </div>
         </form>
       </div>

@@ -9,7 +9,7 @@
   $password_err = "";
   $id = "";
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST"){
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_SESSION['id'])){
 
 	  if (empty(trim($_POST["email"]))) {
 		  $email_err = 'Please enter your email.';

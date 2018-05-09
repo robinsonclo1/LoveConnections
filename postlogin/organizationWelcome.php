@@ -136,6 +136,46 @@ if ($stmt = $conn->prepare($sql)) {
       </div>
     </div>
 
+    <!-- Add Details Modal -->
+    <div id="addDetailsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Add an event</h4>
+          </div>
+
+          <div class="modal-body addEvent">
+            <h4>Event Details</h4>
+
+            <!-- The events are added here -->
+            <form class="eventForm" id="addEventForm" action="../postLogin/newEvent.php" method="POST">
+
+              <div class="detailsModalContainer">
+                <label>Event Name</label>
+                <input type='text' name="eventName" id="eventName" placeholder='Name of the new event' class='eventName newEvent'/>
+                <label>Location</label>
+                <input type="text" name="eventLocation" id="eventLocation" autocomplete="off" id="us2-address"/>
+                <label>Number of Rounds</label>
+                <input type='number' name="numRounds" id="eventNumRounds" class='numRounds'/>
+                <label>Event Date</label>
+                <input type='date' name="eventDate" id="eventDate" class='eventDate'/>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="addEventSaveChanges">Save Changes</button>
+            <button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal">Never Mind</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--End Modal -->
+
     <div class="col-lg-8 col-md-6 col-sm-8 col-xs-6 eventDetails">
       <h1>Event Details</h1>
 
@@ -183,45 +223,7 @@ if ($stmt = $conn->prepare($sql)) {
   </div>
 </div>
 
-<!-- Add Details Modal -->
-<div id="addDetailsModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add an event</h4>
-      </div>
-
-      <div class="modal-body addEvent">
-        <h4>Event Details</h4>
-
-        <!-- The events are added here -->
-        <form class="eventForm" id="addEventForm" action="../postLogin/newEvent.php" method="POST">
-
-          <div class="detailsModalContainer">
-            <label>Event Name</label>
-            <input type='text' name="eventName" id="eventName" placeholder='Name of the new event' class='eventName newEvent'/>
-            <label>Location</label>
-            <input type="text" name="eventLocation" id="eventLocation" autocomplete="off" id="us2-address"/>
-            <label>Number of Rounds</label>
-            <input type='number' name="numRounds" id="eventNumRounds" class='numRounds'/>
-            <label>Event Date</label>
-            <input type='date' name="eventDate" id="eventDate" class='eventDate'/>
-          </div>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="addEventSaveChanges">Save Changes</button>
-        <button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal">Never Mind</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-<!--End Modal -->
 
 <!-- Change Details Modal -->
 <div id="changeDetailsModal" class="modal fade" role="dialog">
@@ -288,7 +290,7 @@ if ($stmt = $conn->prepare($sql)) {
           </div>
         </form>
       </div>
- 
+
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="deleteEvent">Delete Event</button>
         <button type="button" class="btn btn-default" id="dismiss" data-dismiss="modal">Never Mind</button>

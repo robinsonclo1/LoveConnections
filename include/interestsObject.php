@@ -57,13 +57,13 @@ class Interests {
     $numArts = 8;
     $i=0;
     echo "<div class='col-xs-12'>
-            <div class='col-md-4 col-sm-6' style='text-align:center;'>
+            <div class='col-md-4 col-sm-6 interest-section'>
               <div id='athletics'>
                 <h3>Athletics</h3>";
                 $this->sectionOfCheckboxes($i, $numAthletics);
     echo "    </div>
             </div>
-            <div class='col-md-4 col-sm-6' style='text-align:center;'>
+            <div class='col-md-4 col-sm-6 interest-section'>
               <div id='academic'>
               <h3>Academic</h3>";
               $this->sectionOfCheckboxes($numAthletics, $numAthletics+$numAcademic);
@@ -73,7 +73,7 @@ class Interests {
                $this->sectionOfCheckboxes($numAthletics+$numAcademic, $numAthletics+$numAcademic+$numReligion);
     echo "  </div>
           </div>
-          <div class='col-md-4 col-sm-12' style='text-align:center;'>
+          <div class='col-md-4 col-sm-12 interest-section'>
             <div id='artistic'>
               <h3>Arts & Music</h3>";
               $this->sectionOfCheckboxes($numAthletics+$numAcademic+$numReligion, $numAthletics+$numAcademic+$numReligion+$numArts);

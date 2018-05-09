@@ -10,9 +10,6 @@
   </head>
 
   <body>
-
-
-
 	<div class="container-fluid">
 	  <div class="col-md-6 col-md-offset-3">
 	    <div class="sign-up-box">
