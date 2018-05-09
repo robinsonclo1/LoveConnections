@@ -110,17 +110,16 @@ insert into interestCategoriesLink VALUES
     (31,4), (32,4), (33,4);
 
 create table profilePictures(
-	pictureID_PK int unsigned auto_increment primary key,
-    memberID_FK int(6) UNSIGNED NOT NULL,
-    filename nvarchar(255),
-    filetype nvarchar(50),
-    filedata longblob,
-    date_created datetime default current_timestamp,
+  pictureID_PK int unsigned auto_increment primary key,
+  memberID_FK int(6) UNSIGNED NOT NULL,
+  filename nvarchar(255),
+  filetype nvarchar(50),
+  filedata longblob,
+  date_created datetime default current_timestamp,
   foreign key(memberID_FK) references
     memberInfo(memberID_PK) on delete cascade
 );
 
 #insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'Barley\'s Brewing', '467 N High St, Columbus, OH 43215', 4);
-#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'The Three Legged Mare', '401 N Front St #150, Columbus, OH 43215', 5);
-#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-5-25', 'Marcella\'s', '615 N High St, Columbus, OH 43215', 3);
-
+#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-6-1', 'The Three Legged Mare', '401 N Front St #150, Columbus, OH 43215', 5);
+#insert into EventInfo (memberID_FK, eventDate,eventName, eventLocation, numRounds) VALUES (1, '2018-6-8', 'Marcella\'s', '615 N High St, Columbus, OH 43215', 3);

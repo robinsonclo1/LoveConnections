@@ -41,15 +41,13 @@ class UploadHelper
 		}
 	}
 
-	public static function getImages(&$conn)
-	{
+	public static function getImages(&$conn) {
 		$result = $conn->query('SELECT * FROM profilePictures WHERE memberID_FK = ' . $_SESSION['id']);
 
 		return $result ? $result : [];
 	}
 
-	private static function problemWithUpload()
-	{
+	private static function problemWithUpload()	{
 		return !isset($_FILES['upload']) ||
 				!file_exists($_FILES['upload']['tmp_name']) ||
 				$_FILES['upload']['error'] > 0;

@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/connection.php';
+require '../include/connection.php';
 
 // would be in URL like /get-image.php?id=101
 $id = $_GET['id'] ?? null;
@@ -8,7 +8,7 @@ if ($id === null) {
 	return;
 }
 
-$stmt = $conn->prepare('SELECT * FROM pictures WHERE id = ?');
+$stmt = $conn->prepare('SELECT * FROM profilePictures WHERE pictureID_PK = ?');
 $stmt->bind_param('i', $id);
 
 if (!$stmt->execute()) {

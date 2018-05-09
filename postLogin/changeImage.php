@@ -34,7 +34,7 @@
             </form>
             <?php foreach($imgs as $img): ?>
             <div>
-              <img src="getImage.php?id=<?=$img['id']?>" alt="<?=$img['filename']?>" />
+              <img src="../postLogin/getImage.php?id=<?=$img['pictureID_PK']?>" alt="<?=$img['filename']?>" />
             </div>
             <?php endforeach; ?>
         </div>
